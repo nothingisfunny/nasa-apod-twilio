@@ -3,12 +3,12 @@ class MessagesController < ApplicationController
     message = params["Body"]
     from = params["From"]
     twilio
-    sms = @client.messages.create(
+    mms = @client.messages.create(
       from: Rails.application.secrets.twilio_number,
       to: from_number,
-      body: "Test"
+      body: "Test",
+      media_url: 'https://api.nasa.gov/images/apod.jpg'
     )
-    
   end
  
   private
