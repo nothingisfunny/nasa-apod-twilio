@@ -5,13 +5,13 @@ class MessagesController < ApplicationController
     message = params["Body"]
     if message["space me"] || message["SPACE ME"]
       from = params["From"]
-      get_nasa_url
+      nasa_info = get_apod
       twilio
       mms = @client.messages.create(
-        body: @explanation,
+        body: nasa_info[1],
         from: Rails.application.secrets.twilio_number,
         to: from,
-        media_url: @url
+        media_url: nasa_info[0]
       )
     end
   end
@@ -24,12 +24,10 @@ class MessagesController < ApplicationController
     @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
   end
 
-  def get_nasa_url
+  def get_apod
     nasa_key = Rails.application.secrets.nasa_api
     nasa_response = Faraday.get("https://api.nasa.gov/planetary/apod?api_key=#{nasa_key}")
     body_hash = JSON.parse(nasa_response.body)
-    @url = body_hash['url']
-    @explanation = body_hash['explanation']
-
+    return [body_hash['url'], body_hash['explanation']]
   end
 end
