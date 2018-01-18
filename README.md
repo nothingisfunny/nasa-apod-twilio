@@ -1,24 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a test app to see how some of the most basic Twilio functionality works.
 
-Things you may want to cover:
+When 'space me' text is messaged to Twilio phone number, the user receives a response from NASA API with a picture of the day and explanation of it.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
